@@ -1,9 +1,6 @@
 package spaceShip;
 
 public abstract class Gun{
-	void showStatus() {
-		
-	}
 	abstract int getSerialNr();
 	abstract String fireGun();
 }
@@ -52,24 +49,45 @@ class LaserGun extends Gun implements EnergyCapsule{
 }
 
 class MechanicalGun extends Gun implements RepairAble{
+	private final static int magSize = 20;
+	
+	private int bulletsInMag = 20;
+	private int serialNr;
+	
 	MechanicalGun(int serialNr){
 		this.serialNr = serialNr;
 	}
-	int amountOfBullets;
-	
-	void reloadGun() {
-		
-	}
-	
-	String fireGun() {
-		return "Bang Bang";
-	}
-	private int serialNr;
 	
 	public int getSerialNr(){
 		return serialNr;
 	}
 	
+	public int getBulletsInMag() {
+		return bulletsInMag;
+	}
+	
+	public int getMagSize() {
+		return magSize;
+	}
+	
+	String fireGun() {
+		if(bulletsInMag > 0) {
+			bulletsInMag -= 1;
+			return "bang bang";
+		}else {
+			//TODO: Throw out of bullets exception
+			return "out of bullets";
+		}
+	}
+	
+	public void reloadMag() {
+		if(bulletsInMag != magSize) {
+			bulletsInMag += EnergyGrid.chargeOther(magSize - bulletsInMag);
+		}else {
+			//TODO: throw full on bullets exception
+		}
+	}
+		
 	public void repair() {
 		
 	}

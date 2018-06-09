@@ -1,5 +1,7 @@
 package spaceShip;
 
+import java.util.InputMismatchException;
+
 public class GUI {
 	String draw(Gun gun) {
 		if(gun instanceof LaserGun) {
@@ -8,27 +10,26 @@ public class GUI {
 					+ 	"||                     LASER GUN-0" + (((LaserGun)gun).getSerialNr() + 1)+"                       ||\n"
 					+ 	"|| 1. Fire Laser                                          ||\n"
 					+	"||                                                        ||\n"
-					+	"||                           |                            ||\n"
-					+	"||                         \\ o /                          ||\n"
-					+	"|| 2. Charge Laser    -- --o   o-- --                     ||\n"
-					+	"||                         / o \\                          ||\n"
-					+	"||                           |                            ||\n"
-					+	"||                      .............                     ||\n"
-					+	"||       Energy Level > | "+	energyDisplay((LaserGun)gun) +"|           Return 6. ||\n"
-					+	"||                      `````````````                     ||\n"
+					+	"||                                                        ||\n"
+					+	"||                                                        ||\n"
+					+	"|| 2. Charge Laser                                        ||\n"
+					+	"||                                                        ||\n"
+					+	"||                      Energy Level                      ||\n"
+					+	"||                     .............                      ||\n"
+					+	"||                     | "+	energyDisplay((LaserGun)gun) +"|            Return 6. ||\n"
+					+	"||                     `````````````                      ||\n"
 					+	" \\\\======================================================//\n");
 		}else if(gun instanceof MechanicalGun) {
 			return 	   (" //======================================================\\\\\n"
 					+ 	"||                                                        ||\n"
-					+ 	"||                MACHINE GUN-0" + (((MechanicalGun)gun).getSerialNr() + 1)+"                         ||\n"
-					+ 	"|| 1. FIRE!!                                              ||\n"
+					+ 	"||                MACHINE GUN-0" + (((MechanicalGun)gun).getSerialNr() + 1)+"                          ||\n"
+					+ 	"|| 1. Fire Machine Gun                                    ||\n"
 					+	"||                                                        ||\n"
-					+	"||                           |                            ||\n"
-					+	"||                         \\ o /                          ||\n"
-					+	"|| 2. BULLETS: 0      -- --o   o-- --                     ||\n"
-					+	"||                         / o \\                          ||\n"
-					+	"||                           |                            ||\n"
-					+	"||                                                        ||\n"
+					+	"|| 2. Reload Magazine                                     ||\n"
+					+	"||                      Bullets Left                      ||\n"
+					+	"||      ...........................................       ||\n"
+					+	"||      | "+	bulletDisplay((MechanicalGun)gun) +"|       ||\n"
+					+	"||      ```````````````````````````````````````````       ||\n"
 					+	"||                                              Return 6. ||\n"
 					+	"||                                                        ||\n"
 					+	" \\\\======================================================//\n");
@@ -38,11 +39,11 @@ public class GUI {
 					+ 	"||                   GUN-CONTROL-CENTRE                   ||\n"
 					+ 	"|| 1. Laser Guns                                          ||\n"
 					+	"||                                                        ||\n"
-					+	"||                           |                            ||\n"
-					+	"||                         \\ o /                          ||\n"
-					+	"|| 2. Machine Guns    -- --o   o-- --                     ||\n"
-					+	"||                         / o \\                          ||\n"
-					+	"||                           |                            ||\n"
+					+	"||                          ___                           ||\n"
+					+	"||                         /o|o\\OOOOOO                    ||\n"
+					+	"|| 2. Machine Guns         \\_|_/                          ||\n"
+					+	"||                        _/_|_\\_                         ||\n"
+					+	"||                       /oo|O|oo\\                        ||\n"
 					+	"||                                                        ||\n"
 					+	"||                                              Return 6. ||\n"
 					+	"||                                                        ||\n"
@@ -72,11 +73,11 @@ public class GUI {
 					+ 	"||                     MECHANICAL GUNS                    ||\n"
 					+	"|| 1. Machine Gun-01                                      ||\n"
 					+ 	"||                                                        ||\n"
-					+	"||                            ___                         ||\n"
-					+	"||                           /o|o\\OOOOOO                  ||\n"
-					+	"|| 2. Machine Gun-02         \\_|_/                        ||\n"
-					+	"||                          _/_|_\\_                       ||\n"
-					+	"||                         /oo|O|oo\\                      ||\n"
+					+	"||                          ___                           ||\n"
+					+	"||                         /o|o\\OOOOOO                    ||\n"
+					+	"|| 2. Machine Gun-02       \\_|_/                          ||\n"
+					+	"||                        _/_|_\\_                         ||\n"
+					+	"||                       /oo|O|oo\\                        ||\n"
 					+	"||                                                        ||\n"
 					+	"|| 3. Machine Gun-03                            Return 6. ||\n"
 					+	"||                                                        ||\n"
@@ -220,8 +221,19 @@ public class GUI {
 		}
 		return energyDisplay;
 	}
+	
+	StringBuilder bulletDisplay(MechanicalGun mechanicalGun) {
+		StringBuilder energyDisplay = new StringBuilder();
+		for(int i =0; i<mechanicalGun.getBulletsInMag(); i++){
+			energyDisplay.append("+ ");
+		}
+		for(int i = 0; i < (mechanicalGun.getMagSize() -mechanicalGun.getBulletsInMag()); i++) {
+			energyDisplay.append("  ");
+		}
+		return energyDisplay;
+	}
 		
-	String draw(Exception e) {		
+	String draw(InputMismatchException e) {		
 		return (	" //======================================================\\\\\n"
 				+ 	"||                                                        ||\n"
 				+ 	"||                PLEASE ENTER A VALID INPUT              ||\n"
