@@ -60,7 +60,7 @@ public class MainControlPanel {
 					throw new InputMismatchException();
 			}
 		}catch(InputMismatchException e) {
-			InputMismatchExceptionHandler(e);
+			ExceptionHandler(e);
 			mainConsole();
 		}
 	}
@@ -80,7 +80,7 @@ public class MainControlPanel {
 				throw new InputMismatchException();
 			}
 		}catch(InputMismatchException e) {
-			InputMismatchExceptionHandler(e);
+			ExceptionHandler(e);
 			return getTypeOfGun();
 		}
 	}
@@ -100,27 +100,42 @@ public class MainControlPanel {
 				throw new InputMismatchException();
 			}
 		}catch (InputMismatchException e) {
-			InputMismatchExceptionHandler(e);
+			ExceptionHandler(e);
 			return getNrOfGun(typeOfGun);
 		}
 	}
 	
-	void gunControl(Gun gun) {
+	void gunControl(Gun gun){
 		System.out.printf(gui.draw(gun));
 		try {
 			switch(input.nextInt()) {
 			case 1:
-				System.out.println(gun.fireGun());
-				gunControl(gun);
+				try {
+					System.out.println(gun.fireGun());
+					gunControl(gun);
+				}catch(OutOfEnergyException e) {
+					ExceptionHandler(e);
+					gunControl(gun);
+				}catch(OutOfBulletsException e) {
+					ExceptionHandler(e);
+					gunControl(gun);
+				}
 				break;
 			case 2:
-				if(gun instanceof LaserGun) {
-					((LaserGun)gun).chargeEnergy();
-					gunControl(gun);
-				}else if(gun instanceof MechanicalGun) {
-					//TODO: implement reload function for mechanical gun
-	
-					gunControl(gun);
+				try {
+					if(gun instanceof LaserGun) {
+						((LaserGun)gun).chargeEnergy();
+						gunControl(gun);
+					}else if(gun instanceof MechanicalGun) {
+						((MechanicalGun)gun).reloadMag();
+						gunControl(gun);
+					}
+				}catch(FullOnEnergyException e) {
+					ExceptionHandler(e);
+					gunControl(gun);					
+				}catch(FullOnBulletsException e) {
+					ExceptionHandler(e);
+					gunControl(gun);					
 				}
 				break;
 			case 6:	//Return
@@ -134,7 +149,7 @@ public class MainControlPanel {
 				throw new InputMismatchException();
 			}
 		}catch(InputMismatchException e) {
-			InputMismatchExceptionHandler(e);
+			ExceptionHandler(e);
 			gunControl(gun);
 		}
 	}
@@ -155,7 +170,7 @@ public class MainControlPanel {
 				throw new InputMismatchException();
 			}
 		}catch(InputMismatchException e) {
-			InputMismatchExceptionHandler(e);
+			ExceptionHandler(e);
 			return getTypeOfShield();	
 		}
 	}
@@ -169,7 +184,7 @@ public class MainControlPanel {
 				throw new InputMismatchException();
 			}
 		}catch(InputMismatchException e) {
-			InputMismatchExceptionHandler(e);
+			ExceptionHandler(e);
 			shieldControl(shield);
 		}
 	}
@@ -189,7 +204,7 @@ public class MainControlPanel {
 				throw new InputMismatchException();
 			}
 		}catch(InputMismatchException e) {
-			InputMismatchExceptionHandler(e);
+			ExceptionHandler(e);
 			engineControl(engine);
 		}
 	}
@@ -199,8 +214,13 @@ public class MainControlPanel {
 		try {
 			switch(input.nextInt()) {
 			case 1:
-				System.out.println(hyperDrive.makeHyperJump());
-				hyperDriveControl(hyperDrive);
+				try {
+					System.out.println(hyperDrive.makeHyperJump());
+					hyperDriveControl(hyperDrive);
+				}catch (OutOfEnergyException e) {
+					ExceptionHandler(e);
+					hyperDriveControl(hyperDrive);
+				}
 				break;
 			case 2:
 				hyperDrive.chargeEnergy();
@@ -213,7 +233,7 @@ public class MainControlPanel {
 				throw new InputMismatchException();
 			}
 		}catch(InputMismatchException e) {
-			InputMismatchExceptionHandler(e);
+			ExceptionHandler(e);
 			hyperDriveControl(hyperDrive);
 		}
 	}
@@ -227,12 +247,12 @@ public class MainControlPanel {
 				throw new InputMismatchException();
 			}
 		}catch(InputMismatchException e) {
-			InputMismatchExceptionHandler(e);
+			ExceptionHandler(e);
 			energyGridControl(energyGrid);
 		}
 	}
 	
-	void InputMismatchExceptionHandler(InputMismatchException e) {
+	void ExceptionHandler(Exception e) {
 		System.out.printf(gui.draw(e));
 		input.nextLine();
 		input.nextLine();

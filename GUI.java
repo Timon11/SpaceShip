@@ -202,10 +202,10 @@ public class GUI {
 	
 	StringBuilder energyDisplay(EnergyGrid energyGrid) {
 		StringBuilder eDisplay = new StringBuilder();
-		for(int i =0; i<energyGrid.getCurrentEnergy(); i++){
+		for(int i =0; i< EnergyGrid.getCurrentEnergy(); i++){
 			eDisplay.append("# ");
 		}
-		for(int i = 0; i < (20-energyGrid.getCurrentEnergy()); i++) {
+		for(int i = 0; i < (20-EnergyGrid.getCurrentEnergy()); i++) {
 			eDisplay.append("  ");
 		}
 		return eDisplay;
@@ -233,24 +233,101 @@ public class GUI {
 		return energyDisplay;
 	}
 		
-	String draw(InputMismatchException e) {		
-		return (	" //======================================================\\\\\n"
-				+ 	"||                                                        ||\n"
-				+ 	"||                PLEASE ENTER A VALID INPUT              ||\n"
-				+ 	"||                                                        ||\n"
-				+	"||                                                        ||\n"
-				+	"||                           |                            ||\n"
-				+	"||                         \\ o /                          ||\n"
-				+	"||                    -- --o   o-- --                     ||\n"
-				+	"||                         / o \\                          ||\n"
-				+	"||                           |                            ||\n"
-				+	"||                                                        ||\n"
-				+	"||                 Press any key to return      Return 6. ||\n"
-				+	"||                                                        ||\n"
-				+	" \\\\======================================================//\n");
+	String draw(Exception e) {
+		if(e instanceof InputMismatchException) {
+			return (	" //======================================================\\\\\n"
+					+ 	"||                                                        ||\n"
+					+ 	"||                PLEASE ENTER A VALID INPUT              ||\n"
+					+ 	"||                                                        ||\n"
+					+	"||                                                        ||\n"
+					+	"||                           |                            ||\n"
+					+	"||                         \\ o /                          ||\n"
+					+	"||                    -- --o   o-- --                     ||\n"
+					+	"||                         / o \\                          ||\n"
+					+	"||                           |                            ||\n"
+					+	"||                                                        ||\n"
+					+	"||                 Press any key to return      Return 6. ||\n"
+					+	"||                                                        ||\n"
+					+	" \\\\======================================================//\n");
+		}else if(e instanceof OutOfEnergyException) {
+			return (	" //======================================================\\\\\n"
+					+ 	"||                                                        ||\n"
+					+ 	"||                  YOU ARE OUT OF ENERGY                 ||\n"
+					+ 	"||                                                        ||\n"
+					+	"||                                                        ||\n"
+					+	"||                           |                            ||\n"
+					+	"||                         \\ o /                          ||\n"
+					+	"||                    -- --o   o-- --                     ||\n"
+					+	"||                         / o \\                          ||\n"
+					+	"||                           |                            ||\n"
+					+	"||                                                        ||\n"
+					+	"||                 Press any key to return      Return 6. ||\n"
+					+	"||                                                        ||\n"
+					+	" \\\\======================================================//\n");
+		}else if(e instanceof OutOfBulletsException) {
+			return (	" //======================================================\\\\\n"
+					+ 	"||                                                        ||\n"
+					+ 	"||                  YOU ARE OUT OF BULLETS                ||\n"
+					+ 	"||                                                        ||\n"
+					+	"||                                                        ||\n"
+					+	"||                           |                            ||\n"
+					+	"||                         \\ o /                          ||\n"
+					+	"||                    -- --o   o-- --                     ||\n"
+					+	"||                         / o \\                          ||\n"
+					+	"||                           |                            ||\n"
+					+	"||                                                        ||\n"
+					+	"||                 Press any key to return      Return 6. ||\n"
+					+	"||                                                        ||\n"
+					+	" \\\\======================================================//\n");
+		}else if(e instanceof FullOnEnergyException) {
+			return (	" //======================================================\\\\\n"
+					+ 	"||                                                        ||\n"
+					+ 	"||                  YOU ARE FULL ON ENERGY                ||\n"
+					+ 	"||                                                        ||\n"
+					+	"||                                                        ||\n"
+					+	"||                           |                            ||\n"
+					+	"||                         \\ o /                          ||\n"
+					+	"||                    -- --o   o-- --                     ||\n"
+					+	"||                         / o \\                          ||\n"
+					+	"||                           |                            ||\n"
+					+	"||                                                        ||\n"
+					+	"||                 Press any key to return      Return 6. ||\n"
+					+	"||                                                        ||\n"
+					+	" \\\\======================================================//\n");
+		}else if(e instanceof FullOnBulletsException) {
+			return (	" //======================================================\\\\\n"
+					+ 	"||                                                        ||\n"
+					+ 	"||                  YOU ARE FULL ON BULLETS               ||\n"
+					+ 	"||                                                        ||\n"
+					+	"||                                                        ||\n"
+					+	"||                           |                            ||\n"
+					+	"||                         \\ o /                          ||\n"
+					+	"||                    -- --o   o-- --                     ||\n"
+					+	"||                         / o \\                          ||\n"
+					+	"||                           |                            ||\n"
+					+	"||                                                        ||\n"
+					+	"||                 Press any key to return      Return 6. ||\n"
+					+	"||                                                        ||\n"
+					+	" \\\\======================================================//\n");
+		}else {
+			return (	" //======================================================\\\\\n"
+					+ 	"||                                                        ||\n"
+					+ 	"||                 AN ERROR HAS OCCURRED                  ||\n"
+					+ 	"||                                                        ||\n"
+					+	"||                                                        ||\n"
+					+	"||                           |                            ||\n"
+					+	"||                         \\ o /                          ||\n"
+					+	"||                    -- --o   o-- --                     ||\n"
+					+	"||                         / o \\                          ||\n"
+					+	"||                           |                            ||\n"
+					+	"||                                                        ||\n"
+					+	"||                 Press any key to return      Return 6. ||\n"
+					+	"||                                                        ||\n"
+					+	" \\\\======================================================//\n");
+		}
+		
 	}
-	
-	
+		
 	String draw(String s) {
 		switch(s) {
 			case "Start":

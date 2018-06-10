@@ -15,13 +15,13 @@ public class HyperDrive implements EnergyCapsule{
 		return maxEnergy;
 	}
 	
-	String makeHyperJump() {
+	String makeHyperJump() throws OutOfEnergyException{
 		if(myEnergyLevel > minEnergy) {
 			myEnergyLevel -= energyModulation;
 			return "NEAAAAHWWW   -    plop";
 		}else {
-			//TODO: Throw out of energy exception
-			return "out of energy";
+			//Throw out of energy exception
+			throw new OutOfEnergyException();
 		}
 	}
 		

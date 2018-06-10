@@ -1,7 +1,7 @@
 package spaceShip;
 
 public abstract class Shield{
-
+	abstract String getHit() throws OutOfEnergyException;
 }
 
 class EnergyShield extends Shield implements EnergyCapsule{
@@ -19,26 +19,31 @@ class EnergyShield extends Shield implements EnergyCapsule{
 		return maxEnergy;
 	}
 	
-	String getHit() {
+	String getHit() throws OutOfEnergyException{
 		if(myEnergyLevel > minEnergy) {
 			myEnergyLevel -= energyModulation;
 			return "Bzzt";
 		}else {
-			//TODO: Throw out of energy exception
-			return "shield out of energy";
+			//Throw out of energy exception
+			throw new OutOfEnergyException();
 		}
 	}
 	
-	public void chargeEnergy() {
+	public void chargeEnergy() throws FullOnEnergyException {
 		if(myEnergyLevel != maxEnergy) {
 			myEnergyLevel += EnergyGrid.chargeOther(maxEnergy - myEnergyLevel);
 		}else {
-			//TODO: throw full on energy exception
+			//throw full on energy exception
+			throw new FullOnEnergyException();
 		}
 	}
 }
 
 class MetalShield extends Shield implements RepairAble{
+	
+	String getHit() {
+		return "Metal Shield Hit";
+	}
 	public void repair() {
 		
 	}

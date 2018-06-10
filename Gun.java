@@ -2,10 +2,10 @@ package spaceShip;
 
 public abstract class Gun{
 	abstract int getSerialNr();
-	abstract String fireGun();
+	abstract String fireGun()throws OutOfEnergyException, OutOfBulletsException;
 }
 
-class LaserGun extends Gun implements EnergyCapsule{
+class LaserGun extends Gun implements EnergyCapsule {
 	private final static int energyModulation = 1;
 	private final static int minEnergy = 0;
 	private final static int maxEnergy = 5;
@@ -29,21 +29,22 @@ class LaserGun extends Gun implements EnergyCapsule{
 		return maxEnergy;
 	}
 	
-	String fireGun() {
+	String fireGun()throws OutOfEnergyException {
 		if(myEnergyLevel > minEnergy) {
 			myEnergyLevel -= energyModulation;
 			return "pew pew";
 		}else {
-			//TODO: Throw out of energy exception
-			return "out of energy";
+			//Throw out of energy exception
+			throw new OutOfEnergyException();
 		}
 	}
 	
-	public void chargeEnergy() {
+	public void chargeEnergy() throws FullOnEnergyException{
 		if(myEnergyLevel != maxEnergy) {
 			myEnergyLevel += EnergyGrid.chargeOther(maxEnergy - myEnergyLevel);
 		}else {
-			//TODO: throw full on energy exception
+			//throw full on energy exception
+			throw new FullOnEnergyException();
 		}
 	}
 }
@@ -70,21 +71,22 @@ class MechanicalGun extends Gun implements RepairAble{
 		return magSize;
 	}
 	
-	String fireGun() {
+	String fireGun() throws OutOfBulletsException {
 		if(bulletsInMag > 0) {
 			bulletsInMag -= 1;
 			return "bang bang";
 		}else {
-			//TODO: Throw out of bullets exception
-			return "out of bullets";
+			//Throw out of bullets exception
+			throw new OutOfBulletsException();
 		}
 	}
 	
-	public void reloadMag() {
+	public void reloadMag() throws FullOnBulletsException{
 		if(bulletsInMag != magSize) {
 			bulletsInMag += EnergyGrid.chargeOther(magSize - bulletsInMag);
 		}else {
-			//TODO: throw full on bullets exception
+			//throw full on bullets exception
+			throw new FullOnBulletsException();
 		}
 	}
 		
@@ -93,4 +95,5 @@ class MechanicalGun extends Gun implements RepairAble{
 	}
 }
 
-class OutOfEnergyException extends Exception {}
+class OutOfBulletsException extends Exception{}
+class FullOnBulletsException extends Exception{}
