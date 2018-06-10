@@ -18,7 +18,7 @@ public class MainControlPanel {
 	void startConsole() {
 		{
 			gui = new GUI();
-			ship = new Ship();	
+			ship = new Ship("Millennium Falcon");	
 		}
 		
 		System.out.print(gui.draw("Start"));
@@ -52,8 +52,9 @@ public class MainControlPanel {
 					energyGridControl(ship.energyGrid);
 					break;
 				case 6:
-					//TODO: exit
+					//exit
 					System.out.print(gui.draw("Exit"));
+					System.exit(0);
 					break;
 				default:
 					//restart
@@ -133,8 +134,8 @@ public class MainControlPanel {
 				}catch(FullOnEnergyException e) {
 					ExceptionHandler(e);
 					gunControl(gun);					
-				}catch(FullOnBulletsException e) {
-					ExceptionHandler(e);
+				}catch(FullOnBulletsException f) {
+					ExceptionHandler(f);
 					gunControl(gun);					
 				}
 				break;
@@ -223,8 +224,13 @@ public class MainControlPanel {
 				}
 				break;
 			case 2:
-				hyperDrive.chargeEnergy();
-				hyperDriveControl(hyperDrive);
+				try {
+					hyperDrive.chargeEnergy();
+					hyperDriveControl(hyperDrive);
+				}catch(FullOnEnergyException e){
+					ExceptionHandler(e);
+					hyperDriveControl(hyperDrive);
+				}
 				break;
 			case 6:	//Return
 				mainConsole();

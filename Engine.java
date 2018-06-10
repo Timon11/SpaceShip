@@ -1,12 +1,8 @@
 package spaceShip;
 
-public class Engine implements RepairAble{
+public class Engine{
 		
 	void Run() {
 		EnergyGrid.getCharged(20);
-	}
-	
-	public void repair() {
-		
 	}
 }

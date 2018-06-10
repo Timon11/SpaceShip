@@ -25,11 +25,12 @@ public class HyperDrive implements EnergyCapsule{
 		}
 	}
 		
-	public void chargeEnergy() {
+	public void chargeEnergy() throws FullOnEnergyException{
 		if(myEnergyLevel != maxEnergy) {
 			myEnergyLevel += EnergyGrid.chargeOther(maxEnergy - myEnergyLevel);
 		}else {
 			//TODO: throw full on energy exception
+			throw new FullOnEnergyException();
 		}
 	}
 }

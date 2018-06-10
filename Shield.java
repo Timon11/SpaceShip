@@ -39,12 +39,9 @@ class EnergyShield extends Shield implements EnergyCapsule{
 	}
 }
 
-class MetalShield extends Shield implements RepairAble{
+class MetalShield extends Shield{
 	
 	String getHit() {
 		return "Metal Shield Hit";
-	}
-	public void repair() {
-		
 	}
 }

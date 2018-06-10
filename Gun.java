@@ -49,7 +49,7 @@ class LaserGun extends Gun implements EnergyCapsule {
 	}
 }
 
-class MechanicalGun extends Gun implements RepairAble{
+class MechanicalGun extends Gun{
 	private final static int magSize = 20;
 	
 	private int bulletsInMag = 20;
@@ -83,15 +83,11 @@ class MechanicalGun extends Gun implements RepairAble{
 	
 	public void reloadMag() throws FullOnBulletsException{
 		if(bulletsInMag != magSize) {
-			bulletsInMag += EnergyGrid.chargeOther(magSize - bulletsInMag);
+			bulletsInMag += (magSize - bulletsInMag);
 		}else {
 			//throw full on bullets exception
 			throw new FullOnBulletsException();
 		}
-	}
-		
-	public void repair() {
-		
 	}
 }
 

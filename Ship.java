@@ -30,5 +30,8 @@ public class Ship {
 		energyGrid = new EnergyGrid();
 
 	}
+	Ship(String name){
+		this();
+	}
 	
 }

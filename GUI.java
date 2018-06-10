@@ -120,7 +120,7 @@ public class GUI {
 			return (	" //======================================================\\\\\n"
 					+ 	"||                                                        ||\n"
 					+ 	"||                     METAL SHIELD                       ||\n"
-					+ 	"|| 1. Hit Points                                          ||\n"
+					+ 	"||                                                        ||\n"
 					+	"||                                                        ||\n"
 					+	"||                           |                            ||\n"
 					+	"||                         \\ o /                          ||\n"
@@ -246,7 +246,7 @@ public class GUI {
 					+	"||                         / o \\                          ||\n"
 					+	"||                           |                            ||\n"
 					+	"||                                                        ||\n"
-					+	"||                 Press any key to return      Return 6. ||\n"
+					+	"||                 Press any key to return                ||\n"
 					+	"||                                                        ||\n"
 					+	" \\\\======================================================//\n");
 		}else if(e instanceof OutOfEnergyException) {
@@ -261,7 +261,7 @@ public class GUI {
 					+	"||                         / o \\                          ||\n"
 					+	"||                           |                            ||\n"
 					+	"||                                                        ||\n"
-					+	"||                 Press any key to return      Return 6. ||\n"
+					+	"||                 Press any key to return                ||\n"
 					+	"||                                                        ||\n"
 					+	" \\\\======================================================//\n");
 		}else if(e instanceof OutOfBulletsException) {
@@ -276,7 +276,7 @@ public class GUI {
 					+	"||                         / o \\                          ||\n"
 					+	"||                           |                            ||\n"
 					+	"||                                                        ||\n"
-					+	"||                 Press any key to return      Return 6. ||\n"
+					+	"||                 Press any key to return                ||\n"
 					+	"||                                                        ||\n"
 					+	" \\\\======================================================//\n");
 		}else if(e instanceof FullOnEnergyException) {
@@ -291,7 +291,7 @@ public class GUI {
 					+	"||                         / o \\                          ||\n"
 					+	"||                           |                            ||\n"
 					+	"||                                                        ||\n"
-					+	"||                 Press any key to return      Return 6. ||\n"
+					+	"||                 Press any key to return                ||\n"
 					+	"||                                                        ||\n"
 					+	" \\\\======================================================//\n");
 		}else if(e instanceof FullOnBulletsException) {
@@ -306,7 +306,7 @@ public class GUI {
 					+	"||                         / o \\                          ||\n"
 					+	"||                           |                            ||\n"
 					+	"||                                                        ||\n"
-					+	"||                 Press any key to return      Return 6. ||\n"
+					+	"||                 Press any key to return                ||\n"
 					+	"||                                                        ||\n"
 					+	" \\\\======================================================//\n");
 		}else {
@@ -321,7 +321,7 @@ public class GUI {
 					+	"||                         / o \\                          ||\n"
 					+	"||                           |                            ||\n"
 					+	"||                                                        ||\n"
-					+	"||                 Press any key to return      Return 6. ||\n"
+					+	"||                 Press any key to return                ||\n"
 					+	"||                                                        ||\n"
 					+	" \\\\======================================================//\n");
 		}
@@ -363,8 +363,8 @@ public class GUI {
 			case "Exit":
 				return	(	" //======================================================\\\\\n"
 						+ 	"||                                                        ||\n"
-						+ 	"||              ARE YOU SURE YOU WANT TO EXIT?            ||\n"
-						+ 	"|| 1. Exit                                                ||\n"
+						+ 	"||                 THANK YOU AND GOODBYE                  ||\n"
+						+ 	"||                                                        ||\n"
 						+	"||                                                        ||\n"
 						+	"||                           |                            ||\n"
 						+	"||                         \\ o /                          ||\n"
@@ -372,11 +372,24 @@ public class GUI {
 						+	"||                         / o \\                          ||\n"
 						+	"||                           |                            ||\n"
 						+	"||                                                        ||\n"
-						+	"||                                              Return 6. ||\n"
+						+	"||                                                        ||\n"
 						+	"||                                                        ||\n"
 						+	" \\\\======================================================//\n");
 			default:
-				return "";
+				return (	" //======================================================\\\\\n"
+						+ 	"||                                                        ||\n"
+						+ 	"||                 AN ERROR HAS OCCURRED                  ||\n"
+						+ 	"||                                                        ||\n"
+						+	"||                                                        ||\n"
+						+	"||                           |                            ||\n"
+						+	"||                         \\ o /                          ||\n"
+						+	"||                    -- --o   o-- --                     ||\n"
+						+	"||                         / o \\                          ||\n"
+						+	"||                           |                            ||\n"
+						+	"||                                                        ||\n"
+						+	"||                                                        ||\n"
+						+	"||                                                        ||\n"
+						+	" \\\\======================================================//\n");
 		}
 	}
 }
